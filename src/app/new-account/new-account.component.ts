@@ -10,12 +10,15 @@ import { AccountService } from '../services/account-service';
 })
 export class NewAccountComponent {
   
-  constructor(private log :LoggingService, private accountService : AccountService){}
+  constructor(private log :LoggingService, private accountService : AccountService){
+    // suscribe event emit to catch data here
+    this.accountService.statusUpdated.subscribe((status :string) => alert('new status : '+ status));
+  }
 
   onCreateAccount(accountName: string, accountStatus: string) {
     this.accountService.addAccount(accountName,accountStatus);
-     
-     this.log.loggChangeStatus(accountStatus);
+     // now we will log into account service, because we can access or inject log service into account service
+    // this.log.loggChangeStatus(accountStatus);
     //console.log('A server status changed, new status: ' + accountStatus);
   }
 }

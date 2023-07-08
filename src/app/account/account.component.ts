@@ -22,9 +22,10 @@ export class AccountComponent {
 
   onSetTo(status: string) {
     this.accountService.updateAccountSatuts(this.id, status)
-    this.logService.loggChangeStatus(status);
-    ;
-    
-    console.log('A server status changed, new status: ' + status);
+    //emit an event about status update
+    this.accountService.statusUpdated.emit(status);
+    // now we will log into account service, because we can access or inject log service into account service
+    //this.logService.loggChangeStatus(status);
+    //console.log('A server status changed, new status: ' + status);
   }
 }
